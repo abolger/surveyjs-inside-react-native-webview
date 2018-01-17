@@ -12,6 +12,10 @@ import {
   View
 } from 'react-native';
 
+import surveys from './survey/default_surveys';
+import Survey from './survey';
+
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -20,19 +24,22 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
+
+  onSurveyCompleted(ownProps, nextProps) {
+    //TODO: Readers hooks go here.
+    alert("Nested Survey was completed!");
+  }
+
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+        <Survey
+        surveyJSON={surveys.example3PagePatientSatisfactionSurvey}
+        title="My Custom Survey Title"
+        navigation={this.props.navigation}
+        surveyResponseDateString={''}
+        onSurveyComplete={this.onSurveyCompleted}
+        data={{}}/>
     );
   }
 }
