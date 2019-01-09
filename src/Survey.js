@@ -97,18 +97,10 @@ export default class Survey extends Component {
         const key = `@Responses:${id}${(message.surveydata &&
           message.surveydata.email) ||
           ''}`;
-        Toast.show({
-          text: `before set, ${key}`,
-          buttonText: 'Okay'
-        });
         await AsyncStorage.setItem(
           key,
           JSON.stringify({ ...message.surveydata, id })
         );
-        Toast.show({
-          text: `after set`,
-          buttonText: 'Okay'
-        });
         const storedResponses = await AsyncStorage.getItem(key);
 
         if (storedResponses) {
